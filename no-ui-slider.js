@@ -1,73 +1,74 @@
 Vue.component('no-ui-slider', {
   template: "<div :id='sliderId'></div>",
   props: {
-            sliderId: {
-                type: String,
-                default: function() {
-                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-                        return v.toString(16);
-                    });
-                }
-            },
-            sliderConfig: Object,
-            sliderValue: {
-                type: Array,
-                twoWay: true
-            }
-        },
-        
-        data() {
-            return {
-                slider: null
-            }
+    sliderId: {
+      type: String,
+      default: function() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0,
+            v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+        });
+      }
+    },
+    sliderConfig: Object,
+    sliderValue: {
+      type: Array,
+      twoWay: true
+    }
+  },
 
-        },
-        methods: {
+  data() {
+    return {
+      slider: null
+    }
 
-            updateValue: function (value, handle) {
+  },
+  methods: {
 
-                this.$set('sliderValue['+handle+']', value[handle]);
+    updateValue: function(value, handle) {
 
-            },
+      this.$set('sliderValue[' + handle + ']', value[handle]);
 
-            checkForInputs: function() {
-                var self = this,
-                    i = 0,
-                    numOfValues = this.sliderValue.length;
-                
-                this.sliderValue.forEach(function(value) {
+    },
 
-                    if (document.getElementById(self.sliderId+"-input-"+i)) {
-                        var arrayKey = i,
-                            valueArray = Array.apply(null, Array(numOfValues)).map(function () {});
+    checkForInputs: function() {
+      var self = this,
+        i = 0,
+        numOfValues = this.sliderValue.length;
 
-                        document.getElementById(self.sliderId+"-input-"+i).addEventListener('change', function () {
+      this.sliderValue.forEach(function(value) {
 
-                            valueArray[arrayKey] = this.value;
+        if (document.getElementById(self.sliderId + "-input-" + i)) {
+          var arrayKey = i,
+            valueArray = Array.apply(null, Array(numOfValues)).map(function() {});
 
-                            self.slider.noUiSlider.set(valueArray);
+          document.getElementById(self.sliderId + "-input-" + i).addEventListener('change', function() {
 
-                        });
+            valueArray[arrayKey] = this.value;
 
-                    }
+            self.slider.noUiSlider.set(valueArray);
 
-                    i++;
-                })
-            }
-
-        },
-        ready: function () {
-            this.slider = document.getElementById(this.sliderId);
-
-            this.sliderConfig.start = this.sliderValue;
-
-            noUiSlider.create(this.slider, this.sliderConfig);
-
-            this.slider.noUiSlider.on('update', this.updateValue);
-
-            this.checkForInputs();
+          });
 
         }
+
+        i++;
+      })
+    }
+
+  },
+  ready: function() {
+    this.slider = document.getElementById(this.sliderId);
+
+    this.sliderConfig.start = this.sliderValue;
+
+    noUiSlider.create(this.slider, this.sliderConfig);
+
+    this.slider.noUiSlider.on('update', this.updateValue);
+
+    this.checkForInputs();
+
+  }
 
 })
