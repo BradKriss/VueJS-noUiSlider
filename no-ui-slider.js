@@ -9,7 +9,6 @@ Vue.component('no-ui-slider', {
                         return v.toString(16);
                     });
                 }
-
             },
             sliderConfig: Object,
             sliderValue: {
@@ -17,10 +16,9 @@ Vue.component('no-ui-slider', {
                 twoWay: true
             }
         },
-
+        
         data() {
             return {
-                //sliderId: this.uuid4(),
                 slider: null
             }
 
