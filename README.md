@@ -32,13 +32,16 @@ You can pass one or two values through here depending how many handles you want.
 This is only needed if you want to link the slider to an input box, if no data is passed through the slider will be given a uuid4 id.
 
 ## Linking input boxes
-Input boxes are linked by naming convention and must also be a model for one of the slider values.
+Input boxes are linked by naming convention and must also include a model for the linked slider value.
 
-Example: If your slider has an id of `my-slider` your inputs id should be `my-slider-input-0` for the first handle and `my-slider-input-1` for the second handle (the 0 and the 1 refrence the array key)
+Example: If your slider has an id of `my-slider` your inputs id should be `my-slider-input-0` for the first handle and `my-slider-input-1` for the second handle (0 and 1 refrence the array key)
 ```
 <input id="my-slider-input-0" v-model="sliderValue[0]">
 ```
 
 **You can check out a working example here:** https://jsfiddle.net/bradkriss/s2o0Ltzv/
 
-Note: I'm always looking to grow as a developer so let me know if there's anything I can do better!
+---
+Constructive criticism welcomed.
+
+LICENSE: [WTFPL](http://www.wtfpl.net/) (DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE)
